@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+
+{% block head %}
+
+<title> {{ title }} </title>
+<link rel='stylesheet' href='{{ url_for('static', filename='style.css') }}'>
+
+{% endblock %}
+
+{% block body %}
+
+<div class='container'>
+  <p> Where do you want to go? </p>
+
+  <div>
+    <a href='/train'>
+      <code>Train</code>
+    </a>
+
+    <a href='/run'>
+      <code>Run</code>
+    </a>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

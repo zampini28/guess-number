@@ -1,0 +1,64 @@
+{% extends '_base.html' %}
+
+{% block head %}
+
+<title> {{ title }} </title>
+<link rel='stylesheet' href='{{ url_for('static', filename='style.css') }}'>
+<style>
+button {
+  cursor: pointer;
+}
+
+s {
+  color: white;
+}
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+<div style='position: absolute; top: 100px; left: 650px;'>
+  <p> delete me! </p>
+  <p> to do: </p>
+  <ul>
+    <li><s>draw in canvas</s></li>
+    <li><s>clear canvas</s></li>
+    <li><s>button update text</s></li>
+    <li><s>send button run on enter</s></li>
+    <li>send request</li>
+    <li><s>back menu absolute button</s></li>
+  </ul>
+</div>
+
+<div>
+  <a href='/'>
+    Menu
+  </a>
+</div>
+
+<div class='container'>
+
+  <p> Welcome to the training section! </p>
+
+  <canvas id='draw_canvas' width=600 height=600></canvas>
+
+  <p> Expecting number for <strong id='valnum'>X</strong> </p>
+  {% for i in range(1, 10): %}
+  <button onclick='actionButton({{ i }})' type='button'>{{ i }}</button>
+  {% endfor %}
+
+  <button onclick='sendButton()' type='button'>
+    Send train
+  </button>
+  <small>
+    or just press enter
+  </small>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src='{{ url_for('static', filename='canvas.js') }}'></script>
+{% endblock %}

@@ -42,7 +42,7 @@ def endpoint():
     if not isinstance(grid_state, list):
         return jsonify({'error': 'gridState must be a list'}), 400
 
-    if not isinstance(selected_number, int) or selected_number not in range(1, 9):
+    if not isinstance(selected_number, int) or selected_number not in range(1, 10):
         return jsonify({'error': 'selectedNumber must be an integer between 1 and 9'}), 400
 
     if all(i == 0 for i in grid_state):

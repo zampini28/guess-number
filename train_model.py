@@ -7,7 +7,7 @@ def load_training_data():
     dataset, labels = zip(*[
         (data['grid'], data['label'])
         for filename in os.listdir('dataset') if filename.endswith('.npy')
-        for data in [np.load(os.path.json('dataset', filename), allow_pickle=True).item()]
+        for data in [np.load(os.path.join('dataset', filename), allow_pickle=True).item()]
     ])
 
     return np.array(dataset), np.array(labels)
@@ -20,39 +20,20 @@ def create_model(input_shape):
         layers.Input(shape=input_shape),
         layers.Dense(128, 'relu'),
         layers.Dense(64, 'relu'),
-        layers.Dense(9, 'softmax'),
+        layers.Dense(10, 'softmax'),
     ])
 
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile('adam', 'sparse_categorical_crossentropy', None, ['accuracy'])
 
     return model
 
-print('hello world')
 if __name__ == '__main__':
-    print('calling load_training_data...')
+    input('press any key to continue...')
     x, y = load_training_data()
-    print('load_training_data has turned:')
-    print(f'x: {type(x)}')
-    print(x)
-    print(f'y: {type(y)}')
-    print(y)
 
-    input('press any key to continue...')
-
-    print('calling preprocess_data on x...')
     x = preprocess_data(x)
-    print('preprocess_data has turned:')
-    print(f'x: {type(x)}')
-    print(x)
 
-    input('press any key to continue...')
-
-    print('calling create_model on x...')
-    print('sending...')
-    print(x.shape[1:])
     model = create_model(x.shape[1:])
-    print('create_model has turned:')
-    print(f'model: {type(model)}')
-    print(model)
+    model.fit(x, y, 32, 10)
 
-    input('press any key to continue...')
+    model.save('number_recognition_model.keras')

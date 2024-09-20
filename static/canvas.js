@@ -107,14 +107,16 @@ function sendButton() {
     },
     body: JSON.stringify(dataToSend)
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok)
+      throw new Error()
+    return response.json()
+  })
   .then(data => {
-    console.log('Success:', data)
     fillAll('#0a0')
     setTimeout(clearCanvas, 80)
   })
   .catch(error => {
-    console.error('Error:', error)
     fillAll('#a00')
     setTimeout(clearCanvas, 80)
   })
@@ -128,3 +130,4 @@ document.addEventListener('keydown', event => {
     if (+event.key != 0)
       actionButton(+event.key)
 })
+
